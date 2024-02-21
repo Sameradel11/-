@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees Information</title>
+    <link rel="stylesheet" href="{% static 'base/project.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <h2>Employees Information</h2>
+
+    <form method="GET" class="search-container-info">
+        {% csrf_token %}
+        <div class="search-container">
+            <input type="text" placeholder="Search for employees..." id="q" name='q'>
+            <button type="submit">Search <i class="fa fa-search"></i></button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Role</th>
+                <th>Room Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee.Employee_ID }}</td>
+                <td>{{ employee.Name }}</td>
+                <td>{{ employee.Phone_Number }}</td>
+                <td>{{ employee.Role }}</td>
+
+                <td>
+                {% for room in employee.employee_room_set.all  %}
+
+                    <p>
+                        {{ room.Room_Number }} 
+                    <a href="{% url 'add_employee_room' employee.Employee_ID %}">
+                        <i class="fas fa-plus edit-icon"></i>
+                    </a>    
+                        {% endfor %}
+                    </p>
+
+                </td>
+                
+                <td class="action-icons">
+                    <a href="{% url 'remove_employee' employee.Employee_ID %}">
+                        <i class="fas fa-trash delete-icon"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Plus sign icon positioned at the bottom right corner of the page -->
+    <div class="add-info">
+        <a href="{% url 'add_employee' %}">
+            <i class="fas fa-plus-circle plus-icon"></i>
+        </a>
+    </div>
+</body>
+</html>
