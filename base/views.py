@@ -340,7 +340,6 @@ def add_employee_room(request,pk):
     if request.method=="POST":
         emp = Employee.objects.get(Employee_ID=pk)
         room = Room.objects.get(Room_Number=request.POST.get('room_number'))
-
         emproom=Employee_Room.objects.create(
             Employee_ID=emp,
             Room_Number=room
