@@ -24,10 +24,12 @@ def add_patient(request):
 
 
 def patient(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-    patients = Patient.objects.filter(Name__icontains=q)
-    context = {'patients': patients}
-    return render(request, 'base/patient/patient.html', context)
+    # q = request.GET.get('q') if request.GET.get('q') != None else ''
+    # patients = Patient.objects.filter(Name__icontains=q)
+    # context = {'patients': patients}
+    return render(request, 'base/patient/patient.html', 
+    # context
+    )
 
 
 def remove_patient(request, pk):
