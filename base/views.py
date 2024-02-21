@@ -6,6 +6,7 @@ from .forms import PatientForm
 
 def home(request):
     return render(request,'base/home.html')
+    
 
 def start(request):
     return render(request, 'base/Start.html')
